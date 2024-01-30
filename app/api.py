@@ -5,7 +5,7 @@ import pickle
 
 app = FastAPI()
 
-# Load the model
+
 with open('./model.pkl', 'rb') as f:
     model = pickle.load(f)
 
@@ -18,7 +18,7 @@ class InputData(BaseModel):
     stops: int
     type: int
 
-# Allow all origins in this example (you may want to restrict this in production)
+
 origins = ["http://localhost:8080", "http://127.0.0.1:8080"]
 
 app.add_middleware(
@@ -47,7 +47,7 @@ async def predict(data: InputData):
                 data.type
             ]
         ]
-        predictions = model.predict(input_data).tolist()  # Convert predictions to a list
+        predictions = model.predict(input_data).tolist() 
         return  predictions
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
